@@ -1,0 +1,16 @@
+server:
+  port: 9090
+  error:
+    include-message: ALWAYS
+
+spring:
+  application:
+    name: sample-app
+
+
+
+#springdoc:
+#  swagger-ui:
+#    enabled: true
+#    path: /swagger-ui
+
