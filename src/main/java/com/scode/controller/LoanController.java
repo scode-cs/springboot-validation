@@ -26,7 +26,7 @@ public record LoanController (LoanService loanService) {
     @PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public LoanResponse add(@RequestBody @Valid LoanRequest request) {
-        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unable to process!!");
-//        return loanService.add(request);
+//        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unable to process!!");
+        return loanService.add(request);
     }
 }

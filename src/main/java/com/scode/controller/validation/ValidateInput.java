@@ -1,21 +1,23 @@
 package com.scode.controller.validation;
 
 import com.scode.model.LoanRequest;
-import org.springframework.stereotype.Component;
+import lombok.experimental.UtilityClass;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 
-import java.util.Objects;
+import java.math.BigDecimal;
 
-@Component
+@UtilityClass
 public class ValidateInput {
 
-    public static void validateRequest(LoanRequest loanRequest){
+    public static void validateRequest(LoanRequest request) {
+        if (request.interestRate().compareTo(BigDecimal.ZERO) < 0) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Input request can't be blank!!");
+        }
 
-//        if( Objects.isNull(customer.getName()) || customer.getName().isEmpty()){
-//            throw new InvalidInputException("Invalid input - name cannot be null");
-//        }
-//        if( Objects.isNull(customer.getAddresses())
-//                || (Objects.nonNull(customer.getAddresses()) && customer.getAddresses().isEmpty())){
-//            throw new InvalidInputException("Invalid input - address cannot be null");
-//        }
+        if (request.loanAmount().compareTo(request.downPayment()) < 0) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Downpayment can't be greater than the loan amount!!");
+        }
+
     }
 }
